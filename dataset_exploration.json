@@ -1,0 +1,30 @@
+{
+  "total_samples": 3641,
+  "features": [
+    "index",
+    "audio",
+    "Emotion",
+    "Initial text",
+    "Annotator response 1",
+    "Annotator response 2",
+    "Annotator response 3",
+    "Result",
+    "dnsmos",
+    "duration",
+    "speaker_id",
+    "data_name",
+    "gender"
+  ],
+  "token_counts": {
+    "🌬️": 0,
+    "😤": 0,
+    "😷": 0,
+    "👃": 0,
+    "🤣": 0,
+    "🤧": 0,
+    "🗣️": 0,
+    "😖": 0,
+    "🐖": 0
+  },
+  "sample_examples": []
+}

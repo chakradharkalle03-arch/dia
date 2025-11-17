@@ -1,0 +1,39 @@
+# Dia Model - GPU Requirements File
+# For GPU-accelerated training and inference
+#
+# Installation Instructions:
+#   1. Using pip: pip install -r requirements_gpu.txt
+#   2. Using conda: See USER_MANUAL.md for conda instructions
+#
+# IMPORTANT: This requires CUDA-compatible GPU and CUDA toolkit installed
+
+# PyTorch with CUDA support (CUDA 12.1)
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Hugging Face Libraries
+transformers>=4.30.0
+datasets>=2.12.0
+accelerate>=0.20.0
+
+# Audio Processing
+soundfile>=0.12.0
+librosa>=0.10.0
+
+# Utilities
+tqdm>=4.65.0
+numpy>=1.24.0,<2.0.0
+
+# Optional: For LoRA fine-tuning (if available)
+# peft>=0.4.0
+# bitsandbytes>=0.41.0
+
+# Optional: For Word document creation
+python-docx>=1.0.0
+
+# Note: The dia package itself should be installed separately:
+#   cd dia
+#   pip install -e .
+
