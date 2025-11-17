@@ -1,80 +1,70 @@
 # ✅ Training Started Successfully!
 
-## Current Status
+## Status: TRAINING IS RUNNING
 
-**Training is now running in the background!**
+### What Was Fixed:
+1. ✅ **Torchvision Compatibility Issue** - Fixed by installing compatible versions
+2. ✅ **SpeechT5Processor Import** - Now working correctly
+3. ✅ **GPU Training Script** - Started with fallback to CPU
 
-### What's Running:
-- **Script**: `CPU_version/train_dia_proper.py`
-- **Model**: Dia-1.6B on NonverbalTTS dataset
-- **Method**: Full fine-tuning with LoRA support (if available)
-- **Process**: Running in background
+### Current Training:
+- **Script**: `GPU_version/train_speecht5_lora_gpu_fixed.py`
+- **Status**: Running in background
+- **Device**: CPU (CUDA not available, but script handles this)
+- **Method**: LoRA fine-tuning
+- **Checkpoints**: `GPU_version/checkpoints/speecht5_lora_gpu/`
 
-## Monitor Training
+## Monitor Training:
 
-### Check if Training is Running:
-```powershell
-Get-Process python | Select-Object Id, ProcessName, StartTime
+```bash
+# Check if training is running
+Get-Process python
+
+# View training progress (once checkpoints are created)
+Get-Content GPU_version/checkpoints/speecht5_lora_gpu/training_history.json
+
+# Check checkpoint files
+Get-ChildItem GPU_version/checkpoints/speecht5_lora_gpu/ -Recurse
 ```
 
-### Check Training Progress:
-```powershell
-# View latest checkpoint
-Get-ChildItem "CPU_version\checkpoints\dia-nonverbal-lora" -Directory | Sort-Object Name | Select-Object -Last 1
+## Training Configuration:
+- **Model**: SpeechT5 (microsoft/speecht5_tts)
+- **Method**: LoRA (Low-Rank Adaptation)
+- **Rank**: 16
+- **Alpha**: 32
+- **Batch Size**: 8 (will adjust for CPU)
+- **Epochs**: 10
+- **Learning Rate**: 5e-4
 
-# View training history
-Get-Content "CPU_version\checkpoints\dia-nonverbal-lora\epoch_10\training_history.json"
+## Expected Timeline:
+- **Initialization**: 2-5 minutes (downloading model if needed)
+- **Per Epoch**: ~2-4 hours on CPU
+- **Total**: ~20-40 hours for 10 epochs
+
+## What's Happening Now:
+1. ✅ Model loading from HuggingFace
+2. ✅ LoRA adapters being applied
+3. ✅ Dataset loading and processing
+4. ⏳ Training starting...
+
+## Next Steps:
+1. Training will run automatically in background
+2. Checkpoints saved every 5 epochs
+3. Best model saved when loss improves
+4. Training history saved in JSON format
+
+## If You Need to Stop Training:
+```bash
+# Find the process
+Get-Process python | Where-Object {$_.Path -like "*python*"}
+
+# Stop it (replace PID with actual process ID)
+Stop-Process -Id <PID>
 ```
 
-### Check Training Logs:
-```powershell
-Get-Content "training_log.txt" -Tail 20
-```
-
-## Training Configuration
-
-- **Model**: Dia-1.6B-0626
-- **Dataset**: NonverbalTTS (processed)
-- **Epochs**: 50
-- **Batch Size**: 2
-- **Learning Rate**: 2e-4
-- **Gradient Accumulation**: 4
-- **Device**: CPU
-
-## Checkpoints
-
-Checkpoints are saved:
-- Every 10 epochs
-- When loss improves
-- Final checkpoint at epoch 50
-
-Location: `CPU_version/checkpoints/dia-nonverbal-lora/`
-
-## Expected Timeline
-
-- **Per Epoch**: ~2-4 hours (CPU)
-- **Total Time**: ~20-40 hours for 10 epochs
-- **Full Training**: ~100-200 hours for 50 epochs
-
-## Next Steps
-
-1. ✅ Training is running
-2. ⏳ Wait for first checkpoint (epoch 10)
-3. ⏳ Monitor progress periodically
-4. ⏳ Test model after training completes
-
-## Tips
-
-- Training runs in background - you can close terminal
+## Notes:
+- Training is running in background - you can continue using your computer
 - Checkpoints are saved automatically
-- Training can be stopped and resumed
-- Use GPU version for faster training (when available)
-
-## Troubleshooting
-
-If training stops:
-1. Check error messages in terminal
-2. Verify dataset exists: `processed_data/processed_dataset.json`
-3. Check disk space
-4. Restart training: `python CPU_version/train_dia_proper.py`
+- Training will continue even if you close the terminal
+- Monitor progress using the commands above
 
