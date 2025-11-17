@@ -174,8 +174,43 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 | 😖 | (groans) |
 | 🐖 | (snorts) |
 
+## 🎤 TTS Model Fine-tuning
+
+This repository now includes scripts to fine-tune proper TTS base models on the NonverbalTTS dataset:
+
+### Available Models
+
+1. **SpeechT5** (Recommended) - Easy to fine-tune, good quality
+   ```bash
+   python train_speecht5.py
+   ```
+
+2. **XTTS-v2** (Advanced) - Excellent quality, supports voice cloning
+   ```bash
+   python train_xtts.py
+   ```
+
+### Quick Start for Fine-tuning
+
+```bash
+# 1. Install TTS dependencies
+pip install -r requirements_tts.txt
+
+# 2. Download audio dataset
+python download_audio_dataset.py
+
+# 3. Fine-tune SpeechT5 (easier option)
+python train_speecht5.py --dataset dataset_audio/dataset_with_audio.json
+
+# 4. Test fine-tuned model
+python test_finetuned_model.py --checkpoint checkpoints/speecht5_finetuned/epoch_10
+```
+
+See **[TTS_FINETUNING_GUIDE.md](TTS_FINETUNING_GUIDE.md)** for detailed instructions.
+
 ## 📚 Documentation
 
+- **[TTS_FINETUNING_GUIDE.md](TTS_FINETUNING_GUIDE.md)** - Complete guide for TTS fine-tuning
 - **[QUICK_START.md](QUICK_START.md)** - Detailed command reference
 - **[README_TRAINING.md](README_TRAINING.md)** - Training documentation
 - **[USER_MANUAL.md](USER_MANUAL.md)** - User manual
