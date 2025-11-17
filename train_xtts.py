@@ -25,7 +25,11 @@ def prepare_xtts_dataset(metadata_file: str, output_dir: str):
     XTTS expects: wav files and a metadata.csv with format:
     wav_file|speaker_name|text
     """
-    import pandas as pd
+    try:
+        import pandas as pd
+    except ImportError:
+        print("Error: pandas not installed. Install with: pip install pandas")
+        return None, 0
     
     print("=" * 70)
     print("Preparing Dataset for XTTS-v2")
